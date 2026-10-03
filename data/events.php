@@ -1,0 +1,47 @@
+<?php
+// User-supplied training photographs and video; no event date or personal identities supplied.
+return [
+    'administrative-management-training' => [
+        'slug' => 'administrative-management-training',
+        'title' => 'Administrative Management Training',
+        'excerpt' => 'A look back at Salaam Center’s Administrative Management training, bringing participants together for practical learning, professional exchange and skills development.',
+        'introduction' => 'Salaam Center recently hosted an Administrative Management training session focused on practical learning, professional exchange and skills development.',
+        'image' => 'assets/images/events/administrative-management-training.jpg',
+        'image_alt' => 'Participants during Administrative Management training at Salaam Center',
+        'video' => 'assets/videos/administrative-management-training.mp4',
+        'video_width' => 896,
+        'video_height' => 512,
+        'gallery' => [
+            ['image' => 'assets/images/events/administrative-management-discussion.jpg', 'height' => 1124, 'alt' => 'Participants exchanging ideas during the training'],
+            ['image' => 'assets/images/events/administrative-management-interaction.jpg', 'height' => 1125, 'alt' => 'Trainer leading a discussion during the session'],
+            ['image' => 'assets/images/events/administrative-management-learning.jpg', 'height' => 1125, 'alt' => 'A participant taking handwritten notes during the training'],
+        ],
+        'completion' => 'The training concluded with the presentation of certificates to participants, marking the completion of the learning experience.',
+        'certificate_image' => 'assets/images/events/administrative-management-certificate.jpg',
+        'group_image' => 'assets/images/events/administrative-management-group.jpg',
+    ],
+    'strategic-commercial-development-ports' => [
+        'slug' => 'strategic-commercial-development-ports',
+        'title' => 'Strategic & Commercial Development of Ports',
+        'excerpt' => 'A professional training session focused on strategic and commercial development in the port sector.',
+        'introduction' => 'Salaam Center hosted a professional training session focused on strategic and commercial development in the port sector, bringing participants together for learning, discussion and professional exchange.',
+        'description' => 'A look inside the training experience, bringing participants together for professional learning and exchange around strategic and commercial development in the port sector.',
+        'image' => 'assets/images/events/strategic-commercial-development-ports/classroom-overview.jpg',
+        'image_width' => 2362,
+        'image_height' => 1660,
+        'image_alt' => 'Trainer and participants during a session on strategic and commercial development of ports',
+        'video' => 'assets/videos/strategic-commercial-development-ports-h264.mp4',
+        'video_width' => 1920,
+        'video_height' => 1080,
+        'gallery_title' => 'Inside the Training',
+        'gallery_eyebrow' => 'Training Moments',
+        'gallery_intro' => 'Scenes from the professional learning and exchange throughout the training session.',
+        'gallery_layout' => 'grid',
+        'gallery' => [
+            ['image' => 'assets/images/events/strategic-commercial-development-ports/trainer-and-participants.jpg', 'width' => 2362, 'height' => 1660, 'alt' => 'Trainer addressing participants around the training tables'],
+            ['image' => 'assets/images/events/strategic-commercial-development-ports/classroom-overview.jpg', 'width' => 2362, 'height' => 1660, 'alt' => 'Classroom overview during the port development training'],
+            ['image' => 'assets/images/events/strategic-commercial-development-ports/presentation.jpg', 'width' => 2362, 'height' => 1660, 'alt' => 'Trainer presenting material to the participants'],
+            ['image' => 'assets/images/events/strategic-commercial-development-ports/professional-exchange.jpg', 'width' => 2362, 'height' => 1660, 'alt' => 'Participants listening and exchanging ideas during the session'],
+        ],
+    ],
+];
