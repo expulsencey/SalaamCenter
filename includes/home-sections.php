@@ -1,7 +1,7 @@
 <?php if (!isset($homeContent) || !function_exists('escapeHtml')) { http_response_code(404); exit; } ?>
 <section class="home-section section-soft" id="about" aria-labelledby="about-title">
     <div class="container split-layout reveal">
-        <figure class="section-visual"><img src="assets/images/home/about-center.png" alt="Salaam Center training space overlooking the city" width="1300" height="800" loading="lazy"><figcaption>A space for learning and exchange</figcaption></figure>
+        <figure class="section-visual"><img class="about-reception-image" src="assets/images/about/salaam-center-reception.webp" alt="Salaam Center reception area" width="1597" height="720" loading="lazy"></figure>
         <div class="section-copy"><p class="courses-eyebrow">About Salaam Center</p><h2 id="about-title">Knowledge for people.<br>Ideas for organizations.</h2><p><?= escapeHtml($homeContent['about']) ?></p><a class="hero-button courses-catalog" href="about.php">Learn More <span aria-hidden="true">→</span></a></div>
     </div>
 </section>

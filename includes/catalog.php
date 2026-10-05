@@ -14,10 +14,7 @@ function courseDate(string $date): string
     return (new DateTimeImmutable($date))->format('j F Y');
 }
 
-function coursePrice(int|float $price): string
-{
-    return '$' . number_format($price, $price == floor($price) ? 0 : 2, '.', ',');
-}
+require_once __DIR__ . '/currency.php';
 
 function courseFacts(array $course): array
 {
@@ -27,7 +24,7 @@ function courseFacts(array $course): array
         'Training Format' => $course['format'],
         'Level' => $course['level'],
         'Next Session' => $course['next_session'] ? courseDate($course['next_session']) : null,
-        'Price' => $course['price_usd'] !== null ? coursePrice($course['price_usd']) : null,
+        'Price' => $course['price_source'] !== null ? coursePrice($course) : null,
     ], static fn($value) => $value !== null && $value !== '');
 }
 

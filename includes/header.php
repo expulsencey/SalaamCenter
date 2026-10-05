@@ -39,6 +39,7 @@
                     <li><a class="navigation-link" href="contact.php"<?= $activePage === 'contact' ? ' aria-current="page"' : '' ?>>Contact</a></li>
                 </ul>
             </nav>
+            <label class="currency-control" hidden><span class="visually-hidden">Display currency</span><select id="display-currency" aria-label="Display currency"><option value="USD">USD ($)</option><option value="DJF">DJF (Fdj)</option></select></label>
         </div>
     </header>
 

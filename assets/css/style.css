@@ -155,7 +155,7 @@ button { font-weight: 500; }
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 2rem;
+    gap: 1rem;
     min-height: 7rem;
     padding-block: 1.25rem;
 }
@@ -281,13 +281,6 @@ button { font-weight: 500; }
 }
 .site-header :focus-visible { outline-color: var(--ambient-highlight); }
 .courses-submenu :focus-visible { outline-color: var(--color-primary); }
-.ambient-page--home .slideshow {
-    width: min(100% - 3rem, 80rem);
-    margin: 2rem auto 4rem;
-    border: 1px solid var(--ambient-border);
-    border-radius: 0.5rem;
-}
-.ambient-page--home .hero-content { margin-left: 0; }
 @keyframes ambient-light {
     0%, 100% { transform: translate(-2%, -1%) scale(1); }
     50% { transform: translate(3%, 2%) scale(1.06); }
@@ -299,7 +292,6 @@ button { font-weight: 500; }
 @media (max-width: 36rem) {
     .page-ambient-hero::before { inset: -10% -28%; }
     .ambient-page--home .page-ambient-hero { height: 55rem; }
-    .ambient-page--home .slideshow { width: calc(100% - 2rem); margin-block: 1.25rem 2.5rem; }
 }
 @media (prefers-reduced-motion: reduce) {
     .page-ambient-hero::before { animation: none; transform: none; }
@@ -308,6 +300,10 @@ button { font-weight: 500; }
 /* Hero */
 .slideshow {
     --hero-transition: 850ms;
+    width: 100%;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
     position: relative;
     display: grid;
     isolation: isolate;
@@ -322,7 +318,7 @@ button { font-weight: 500; }
     position: relative;
     grid-area: 1 / 1;
     min-width: 0;
-    min-height: 35rem;
+    min-height: clamp(35rem, 48vw, 47.5rem);
     display: flex;
     align-items: center;
     opacity: 0;
@@ -359,9 +355,10 @@ button { font-weight: 500; }
     grid-area: 1 / 1;
     align-self: center;
     z-index: 2;
-    margin-left: max(0px, calc((100vw - 80rem) / 2));
-    width: min(100%, 43rem);
-    padding: 4rem 4.5rem 7rem;
+    margin-inline: auto;
+    width: min(calc(100% - 3rem), 80rem);
+    min-width: 0;
+    padding-block: 4rem;
 }
 .hero-eyebrow {
     font-size: 0.8125rem;
@@ -370,7 +367,8 @@ button { font-weight: 500; }
     margin-bottom: 1rem;
 }
 .hero-title {
-    font-size: clamp(2rem, 3.6vw, 3rem);
+    max-width: 40rem;
+    font-size: clamp(2rem, 3.6vw, 3.75rem);
     line-height: 1.15;
     letter-spacing: -0.025em;
     text-wrap: balance;
@@ -407,12 +405,17 @@ button { font-weight: 500; }
 
 /* Responsive */
 @media (max-width: 68rem) {
-    .slide { min-height: 31rem; }
-    .hero-content { padding: 3rem 3rem 7rem; }
+    .slide { min-height: clamp(31.25rem, 65vw, 37.5rem); }
+    .hero-content { padding-block: 3rem; }
 }
 @media (max-width: 36rem) {
-    .slide { min-height: 34rem; }
-    .hero-content { padding: 2.5rem 1.5rem 9rem; }
+    .slide { min-height: clamp(31.25rem, 75svh, 38.75rem); }
+    .hero-content { width: calc(100% - 2rem); padding-block: 3rem; }
+    .slide-panoramic-room img { object-position: 60% center; }
+    .slide-computer-lab img { object-position: 55% center; }
+    .slide-training-classroom img { object-position: 65% 20%; }
+    .slide-conference-hall img { object-position: 55% center; }
+    .slide-meeting-room img { object-position: 45% 20%; }
     .hero-title { font-size: 2rem; }
     .hero-description { font-size: 0.9375rem; }
     .slide::before { background: linear-gradient(0deg, rgba(5, 25, 44, 0.8), rgba(5, 25, 44, 0.62) 65%, rgba(5, 25, 44, 0.25)); }
@@ -585,6 +588,8 @@ a.course-image { display: block; }
 .section-heading { margin-bottom: 2.5rem; }
 .section-visual { position: relative; }
 .section-visual img { display: block; width: 100%; height: auto; aspect-ratio: 5 / 4; object-fit: cover; border-radius: 0.25rem; }
+/* Preserve the complete reception photograph within the existing image area. */
+.section-visual .about-reception-image { object-fit: contain; }
 .section-visual figcaption { position: relative; margin: -1.75rem 1.5rem 0; padding: 1rem 1.25rem; color: var(--color-primary); background: var(--color-background); border: 1px solid var(--color-border); font-size: 0.8125rem; }
 .benefits-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
 .benefit-card { position: relative; isolation: isolate; overflow: hidden; min-height: 20rem; padding: 1.75rem; border: 1px solid var(--color-border); border-radius: 0.25rem; background: var(--color-primary); color: #fff; }
@@ -657,6 +662,9 @@ a.course-image { display: block; }
 .contact-form { background: rgba(255, 255, 255, 0.94); padding: 2rem; border: 1px solid rgba(63, 122, 104, 0.25); border-radius: 20px; box-shadow: 0 12px 36px rgba(31, 90, 74, 0.06); min-width: 0; }
 .form-note { color: var(--color-text-light); font-size: 0.875rem; padding-bottom: 1.5rem; }
 .form-note a { color: var(--color-primary); }
+.contact-form .form-feedback { margin-bottom: 1.5rem; padding: 1rem; border-left: 3px solid var(--contact-deep); background: var(--contact-pale); overflow-wrap: anywhere; }
+.contact-form .form-feedback ul { padding-left: 1.25rem; }
+.contact-form .form-feedback a { color: var(--contact-deep); text-decoration: underline; }
 .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
 .form-message { grid-column: 1 / -1; }
 .contact-form label { display: block; margin-bottom: 0.4rem; font-size: 0.875rem; font-weight: 500; }
@@ -687,6 +695,94 @@ a.course-image { display: block; }
 .about-introduction p + p { margin-top: 1.25rem; }
 @media (max-width: 36rem) {
     .about-actions { flex-direction: column; align-items: flex-start; }
+}
+
+/* Institutional About page: scoped to leave shared pages unchanged. */
+.institutional-about { background: var(--color-background); }
+.about-hero { padding-block: 2rem 0; background: linear-gradient(180deg, var(--ambient-soft), var(--color-background)); }
+.about-hero-heading { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 3rem; align-items: end; margin-bottom: 3rem; }
+.about-hero-heading h1 { font-size: clamp(2.25rem, 3.5vw, 3.75rem); letter-spacing: -0.035em; }
+.about-hero-heading p { max-width: 48ch; color: var(--color-text-light); }
+/* The incoming photograph dissolves over an opaque previous frame. */
+.about-slideshow { position: relative; width: 100%; height: clamp(32.5rem, 46vw, 45rem); overflow: hidden; background: var(--ambient-navy); isolation: isolate; }
+.about-slide { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; opacity: 0; z-index: 0; transition: opacity 1200ms ease-in-out; }
+.about-slide.is-current { opacity: 1; z-index: 1; }
+.about-slide.is-incoming { z-index: 2; }
+.about-slide--reception { object-position: 60% 45%; }
+.about-slide--individual-learning { object-position: 45% 0%; }
+.about-slide--classroom-training { object-position: 50% 45%; }
+.about-slide--group-workshop { object-position: 55% 45%; }
+.about-slide--training-presentation { object-position: 35% 20%; }
+.about-slideshow-controls { position: absolute; z-index: 3; bottom: 1rem; left: 50%; transform: translateX(-50%); display: flex; align-items: center; padding: .125rem .5rem; border-radius: 2rem; background: var(--ambient-glass); }
+.about-slide-dot, .about-slide-pause { min-width: 2.75rem; min-height: 2.75rem; border: 0; background: transparent; color: white; cursor: pointer; }
+.about-slide-dot span { display: block; width: .5rem; height: .5rem; border: 1px solid white; border-radius: 50%; margin: auto; }
+.about-slide-dot[aria-pressed="true"] span { background: white; }
+.about-slide-pause { padding-inline: .5rem; font-size: .8125rem; }
+.about-slideshow-controls button:focus-visible { outline-color: white; }
+@media (max-width: 68rem) { .about-slideshow { height: clamp(28.75rem, 52vw, 35rem); } }
+@media (max-width: 36rem) {
+    .about-slideshow { height: clamp(26.875rem, 64svh, 35rem); }
+    .about-slide--reception { object-position: 73% center; }
+    .about-slide--individual-learning { object-position: 35% center; }
+    .about-slide--classroom-training { object-position: 50% center; }
+    .about-slide--group-workshop { object-position: 65% center; }
+    .about-slide--training-presentation { object-position: 20% center; }
+}
+@media (prefers-reduced-motion: reduce) { .about-slide { transition: none; } }
+
+.institutional-about .about-overview { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
+.about-disciplines { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem; }
+.about-disciplines article { border-top: 1px solid var(--color-border); padding-top: 1.5rem; }
+.about-number { display: block; font-size: 3rem; line-height: 1; color: var(--color-primary); margin-bottom: 2rem; }
+.about-disciplines p { margin-top: 1rem; color: var(--color-text-light); }
+.about-recognition { background: var(--ambient-navy); color: var(--color-background); }
+.about-recognition .courses-eyebrow { color: var(--color-accent); }
+.about-recognition .section-heading h2 { max-width: 52rem; }
+.about-recognition .section-heading > p:not(.courses-eyebrow) { max-width: 78ch; color: var(--footer-text); }
+.about-award-facts { display: grid; grid-template-columns: 1.2fr 1.2fr .5fr 1.8fr .6fr; gap: 1.5rem; padding-block: 1.75rem; margin-bottom: 2.5rem; border-block: 1px solid var(--ambient-border); }
+.about-award-facts dt { font-size: .8125rem; color: var(--color-accent); margin-bottom: .5rem; }
+.about-award-facts dd { font-size: .9375rem; }
+/* Natural image ratios keep embedded award titles and every person visible. */
+.about-award-gallery { display: grid; grid-template-columns: 2fr 1fr; gap: 1rem; align-items: center; }
+.about-award-gallery img { display: block; width: 100%; height: auto; aspect-ratio: 1280 / 900; object-fit: contain; border-radius: .5rem; }
+.about-award-gallery img:first-child { grid-row: span 2; }
+.about-recognition-note { max-width: 75ch; margin-top: 2rem; font-size: .9375rem; color: var(--footer-text); }
+.about-facility-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
+.about-facility-gallery figure:first-child { grid-column: 1 / -1; }
+.about-facility-gallery img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 20px; }
+.about-facility-gallery figure:first-child img { aspect-ratio: 2.4; object-position: center 60%; }
+.about-facility-gallery figcaption { margin-top: .875rem; font-size: .9375rem; font-weight: 500; }
+.about-venue-details { margin-top: 2rem; }
+.about-venue-details > summary { padding-block: 1.25rem; border-block: 1px solid var(--color-border); cursor: pointer; color: var(--color-primary); font-weight: 500; }
+.about-values-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 4rem; }
+.about-values { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem; }
+.about-values article { border-top: 2px solid var(--color-primary); padding-top: 1.5rem; }
+.about-values h3 { font-size: 1.2rem; }
+.about-values p { margin-top: 1rem; color: var(--color-text-light); }
+.about-closing { background: var(--color-primary); color: var(--color-background); }
+.about-closing p { margin-top: 1.5rem; }
+.about-closing .hero-button { background: var(--color-background); color: var(--color-primary); border-color: var(--color-background); }
+.about-closing .hero-button:last-child { background: transparent; color: var(--color-background); }
+.about-closing .hero-button:hover { background: var(--ambient-navy); color: var(--color-background); }
+.about-closing a:focus-visible { outline-color: var(--color-background); }
+@media (max-width: 68rem) {
+    .about-hero-heading { gap: 2rem; }
+    .about-award-facts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .about-values-layout { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+}
+@media (max-width: 48rem) {
+    .about-hero-heading, .institutional-about .about-overview { grid-template-columns: minmax(0, 1fr); }
+    .about-hero-heading p { max-width: 65ch; }
+    .about-disciplines { grid-template-columns: minmax(0, 1fr); }
+    .about-number { margin-bottom: 1rem; }
+    .about-award-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .about-award-gallery img:first-child { grid-column: 1 / -1; grid-row: auto; }
+}
+@media (max-width: 36rem) {
+    .about-hero-heading { margin-bottom: 2rem; }
+    .about-award-facts, .about-values, .about-facility-gallery, .about-award-gallery { grid-template-columns: minmax(0, 1fr); }
+    .about-facility-gallery figure:first-child img { aspect-ratio: 16 / 9; }
+    .about-closing .cta-actions { flex-direction: column; }
 }
 
 /* Shared footer */
@@ -813,4 +909,14 @@ a.course-image { display: block; }
 @media (prefers-reduced-motion: reduce) {
     .home-event-grid .event-feature { transition: none; }
     .home-event-grid .event-feature:hover { transform: none; }
+}
+
+/* Compact global course currency control. */
+.currency-control { flex: none; }
+.currency-control select { font: inherit; font-size: 0.8125rem; min-height: 2.75rem; max-width: 100%; padding: 0.5rem; color: var(--color-text); background: var(--color-background); border: 1px solid var(--color-border); border-radius: 0.25rem; }
+@media (max-width: 68rem) {
+    .currency-control { order: 1; margin-left: auto; }
+    .menu-toggle { order: 2; }
+    .primary-navigation { order: 3; }
+    .header-content .site-logo { flex: 0 1 calc(100% - 11rem); }
 }

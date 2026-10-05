@@ -45,7 +45,7 @@ require __DIR__ . '/includes/header.php';
                     <?php if (courseFacts($course)): ?>
                     <h2>Course Information</h2>
                         <dl class="course-detail-facts">
-                            <?php foreach (courseFacts($course) as $label => $value): ?><div><dt><?= escapeHtml($label) ?></dt><dd><?= escapeHtml($value) ?></dd></div><?php endforeach; ?>
+                            <?php foreach (courseFacts($course) as $label => $value): ?><div><dt><?= escapeHtml($label) ?></dt><dd><?= $label === 'Price' ? coursePriceMarkup($course) : escapeHtml($value) ?></dd></div><?php endforeach; ?>
                         </dl>
                     <?php endif; ?>
                     <h2 class="enquiry-title">Interested in this course?</h2>

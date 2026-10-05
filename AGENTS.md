@@ -1163,164 +1163,20 @@ It is complete when:
 
 If any of these conditions cannot be satisfied, clearly report the
 limitation instead of hiding it.
-# 43. Currency and Pricing Policy — Critical
+# 43. Currency Policy ? Critical
 
-The public Salaam Center website uses USD ($) as the display currency.
-
-This is a PROJECT-WIDE rule.
-
-All public-facing course prices must be displayed in US dollars.
-
-Use:
-
-$300
-$450
-$2,000
-
-Do NOT display:
-
-300 USD
-300 US$
-53,000 DJF
-53 000 FDJ
-
-The preferred visual format is:
-
-$300
-
----
-
-## Source prices provided in USD
-
-If an authoritative Salaam Center source already provides a current
-price in USD, preserve that USD amount exactly.
-
-Do not recalculate it from an older DJF price.
-
----
-
-## Source prices provided in DJF
-
-Some current Salaam Center documents provide prices in DJF.
-
-These source values must NOT simply be displayed as DJF on the public
-website.
-
-They must be converted to USD according to the project-approved
-DJF-to-USD conversion rule.
-
-IMPORTANT:
-
-Never invent an exchange rate.
-
-Never silently use a live or approximate exchange rate.
-
-The project must use one explicitly approved conversion rule so that
-prices remain consistent throughout the website.
-
-The original DJF value may be preserved internally in the course data
-for traceability, but the public interface must display the approved
-USD value.
-
-Example data architecture:
-
-'price_source' => 38000,
-'price_source_currency' => 'DJF',
-'price_usd' => APPROVED_VALUE,
-
-The public website displays:
-
-$APPROVED_VALUE
-
-not:
-
-38,000 DJF
-
----
-
-## No duplicate conversion
-
-If a course already has an approved USD price in the project data,
-use that value directly.
-
-Never convert an already-converted USD price again.
-
----
-
-## Price consistency
-
-The same course must show the same current USD price everywhere:
-
-- Homepage
-- Course catalogue
-- Course detail page
-- Featured Courses
-- Search results
-- Future registration pages
-
-There must be ONE source of truth for course pricing.
-
-Prefer storing the price in the centralized course dataset rather than
-hard-coding it into multiple templates.
-
----
-
-## Missing prices
-
-If no reliable current price exists:
-
-DO NOT invent one.
-
-DO NOT estimate one.
-
-DO NOT display:
-
-$0
-Free
-TBD
-Contact for price
-
-unless explicitly instructed.
-
-Instead, omit the price field until a confirmed price is available.
-
----
-
-## Historical prices
-
-An old USD price found on salaamcenter.net must not automatically
-override a newer Salaam Center price supplied by the user.
-
-Source priority remains:
-
-1. latest user-provided Salaam Center information;
-2. current confirmed Salaam Center data;
-3. historical official website information.
-
-When a newer source provides a DJF price and the website contains an
-older USD price, treat the newer price as authoritative and apply the
-approved currency conversion rule.
-
----
-
-## Price formatting
-
-Use consistent formatting throughout the website.
-
-Examples:
-
-$150
-$300
-$1,250
-$2,000
-
-Do not use unnecessary decimals:
-
-$300.00
-
-unless cents are actually required.
-
-Never mix DJF and USD in the public course catalogue.
+- Public course prices support exactly USD and DJF.
+- USD is the default display currency, including when JavaScript is unavailable.
+- One global selector offers USD ($) and DJF (Fdj).
+- The selected currency applies consistently to all course prices and persists across navigation and refresh via localStorage key `salaam_currency`.
+- Invalid or unavailable storage falls back safely to USD.
+- Keep one authoritative source amount and currency per course. Prefer verified original DJF amounts when these are the current source.
+- Never maintain independent USD and DJF prices for one course.
+- Centralize conversion using the established project parity in includes/currency.php only. Do not duplicate the rate in templates or JavaScript.
+- Format USD with two decimals and DJF with no decimals (for example $213.82 and 38,000 Fdj).
+- Never invent missing prices; omit them.
+- Current user-supplied prices take priority over historical prices.
+- Do not add EUR, other currencies or geolocation unless explicitly requested later.
 
 # 44. Existing Salaam Center Information Architecture — Critical
 
@@ -1470,7 +1326,7 @@ Do not put the primary price:
 - underneath multiple metadata rows;
 - in a random card location.
 
-All public prices remain USD only.
+All public course prices follow the selected USD or DJF currency.
 
 ------------------------------------------------------------
 HOMEPAGE COURSES
@@ -1485,7 +1341,7 @@ Each featured course uses:
 
 IMAGE
 +
-USD PRICE AT BOTTOM-LEFT OF IMAGE
+SELECTED CURRENCY PRICE AT BOTTOM-LEFT OF IMAGE
 +
 COURSE TITLE
 
@@ -1511,7 +1367,7 @@ Use a clean responsive grid inspired by the reference website.
 Course card:
 
 IMAGE
-USD PRICE — BOTTOM LEFT OF IMAGE
+SELECTED CURRENCY PRICE — BOTTOM LEFT OF IMAGE
 COURSE TITLE
 
 Clicking the image/title/card leads to the detailed course page.
@@ -1555,7 +1411,7 @@ A category page should show only courses belonging to that category.
 Use the same reusable course-card component:
 
 IMAGE
-USD PRICE AT BOTTOM-LEFT
+SELECTED CURRENCY PRICE AT BOTTOM-LEFT
 COURSE TITLE
 
 Do not create a visually unrelated card design for category pages.
@@ -1575,7 +1431,7 @@ appear:
 
 - title
 - image
-- USD price
+- price in the selected currency
 - description
 - duration
 - language

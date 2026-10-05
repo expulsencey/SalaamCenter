@@ -167,9 +167,18 @@ function initTestimonials() {
 }
 initTestimonials();
 
-// No request is sent until a real backend has been configured.
+// The server validates every request; this only prevents accidental repeated clicks.
 document.querySelectorAll('.contact-form').forEach(form => {
-    form.addEventListener('submit', event => event.preventDefault());
+    const button = form.querySelector('button[type="submit"]');
+    form.addEventListener('submit', event => {
+        if (form.dataset.submitting) { event.preventDefault(); return; }
+        form.dataset.submitting = 'true';
+        if (button) { button.disabled = true; button.textContent = 'Sending...'; }
+    });
+    window.addEventListener('pageshow', () => {
+        delete form.dataset.submitting;
+        if (button) { button.disabled = false; button.textContent = 'Send Message'; }
+    });
 });
 
 
@@ -201,3 +210,105 @@ function initEventVideo() {
     updatePlayback();
 }
 initEventVideo();
+
+function initCurrencySelector() {
+    const selector = document.querySelector('#display-currency');
+    if (!selector) return;
+    const prices = document.querySelectorAll('[data-course-price]');
+    const usd = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const djf = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 });
+    const validCurrency = value => value === 'DJF' ? 'DJF' : 'USD';
+    function display(currency) {
+        selector.value = validCurrency(currency);
+        prices.forEach(price => {
+            const amount = Number(price.dataset[selector.value.toLowerCase()]);
+            if (!Number.isFinite(amount)) return;
+            price.textContent = selector.value === 'USD' ? '$' + usd.format(amount) : djf.format(amount) + ' Fdj';
+        });
+    }
+    function restore() {
+        let currency = 'USD';
+        try { currency = localStorage.getItem('salaam_currency'); } catch (_) { /* Storage is optional. */ }
+        display(currency);
+    }
+    selector.addEventListener('change', () => {
+        display(selector.value);
+        try { localStorage.setItem('salaam_currency', selector.value); } catch (_) { /* Keep this page usable. */ }
+    });
+    window.addEventListener('pageshow', restore);
+    window.addEventListener('storage', event => { if (event.key === 'salaam_currency' || event.key === null) restore(); });
+    restore();
+    selector.closest('.currency-control').hidden = false;
+}
+initCurrencySelector();
+
+
+function initAboutSlideshow() {
+    const root = document.querySelector('.about-slideshow');
+    if (!root) return;
+    const slides = [...root.querySelectorAll('.about-slide')];
+    const dots = [...root.querySelectorAll('.about-slide-dot')];
+    const pause = root.querySelector('.about-slide-pause');
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const hover = window.matchMedia('(hover: hover)');
+    let current = 0;
+    let timer;
+    let busy = false;
+    let paused = false;
+    let hovered = false;
+
+    function updatePlayback() {
+        window.clearInterval(timer);
+        const focused = root.contains(document.activeElement);
+        if (!paused && !motion.matches && !document.hidden && !hovered && !focused) {
+            timer = window.setInterval(() => show((current + 1) % slides.length), 5500);
+        }
+    }
+
+    async function show(index) {
+        if (busy || index === current) return;
+        busy = true;
+        const next = slides[index];
+        next.loading = 'eager';
+        try {
+            await next.decode();
+        } catch (_) {
+            busy = false;
+            return; // Retain the current photograph if the next one cannot load.
+        }
+        const previous = slides[current];
+        next.classList.add('is-incoming');
+        // Establish the transparent starting frame before beginning the dissolve.
+        void next.offsetWidth;
+        next.classList.add('is-current');
+        previous.setAttribute('aria-hidden', 'true');
+        next.removeAttribute('aria-hidden');
+        current = index;
+        dots.forEach((dot, i) => dot.setAttribute('aria-pressed', String(i === current)));
+        window.setTimeout(() => {
+            previous.classList.remove('is-current');
+            next.classList.remove('is-incoming');
+            slides[(current + 1) % slides.length].loading = 'eager';
+            busy = false;
+        }, motion.matches ? 0 : 1200);
+    }
+
+    dots.forEach((dot, index) => dot.addEventListener('click', () => { show(index); updatePlayback(); }));
+    pause.addEventListener('click', () => {
+        paused = !paused;
+        pause.textContent = paused ? 'Play' : 'Pause';
+        pause.setAttribute('aria-label', paused ? 'Play slideshow' : 'Pause slideshow');
+        updatePlayback();
+    });
+    root.addEventListener('pointerenter', () => { hovered = hover.matches; updatePlayback(); });
+    root.addEventListener('pointerleave', () => { hovered = false; updatePlayback(); });
+    root.addEventListener('focusin', updatePlayback);
+    root.addEventListener('focusout', () => window.setTimeout(updatePlayback, 0));
+    document.addEventListener('visibilitychange', updatePlayback);
+    motion.addEventListener('change', () => { pause.hidden = motion.matches; updatePlayback(); });
+    pause.hidden = motion.matches;
+    root.querySelector('.about-slideshow-controls').hidden = false;
+    slides[1].loading = 'eager';
+    updatePlayback();
+}
+initAboutSlideshow();
