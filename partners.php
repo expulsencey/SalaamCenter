@@ -1,5 +1,6 @@
 <?php
-require __DIR__ . '/includes/catalog.php';
+require_once __DIR__ . '/includes/helpers.php';
+$site = require __DIR__ . '/data/site.php';
 $partners = require __DIR__ . '/data/partners.php';
 $activePage = 'partners';
 $pageTitle = 'Our Educational Partners — Salaam Center';

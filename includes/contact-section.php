@@ -1,4 +1,8 @@
-<?php if (!function_exists('escapeHtml')) { http_response_code(404); exit; } ?>
+<?php
+// Requires $site and escapeHtml(); load contact-handler.php before any output to prepare
+// $contactValues, $contactErrors, $contactSuccess, $contactTopics and the session CSRF token.
+// Optional $venueTopic supplies the existing venue label and email subject.
+ if (!function_exists('escapeHtml')) { http_response_code(404); exit; } ?>
 <section class="home-section contact-section" id="contact" aria-labelledby="contact-title">
     <div class="container split-layout">
         <div class="section-copy">
@@ -6,9 +10,9 @@
             <h2 id="contact-title">Let’s talk about your next step.</h2>
             <p>Contact our team about training, consultancy or your organization’s learning needs.</p>
             <address class="contact-details">
-                <a href="mailto:info@salaamcenter.net<?= !empty($venueTopic) ? '?subject=' . escapeHtml(rawurlencode($venueTopic)) : '' ?>">info@salaamcenter.net</a>
-                <a href="tel:+25321354317">(+253) 21 35 43 17</a>
-                <p>Salaam Tower, floor 10<br>Saline Ouest, Djibouti</p>
+                <a href="mailto:<?= escapeHtml($site['email']) ?><?= !empty($venueTopic) ? '?subject=' . escapeHtml(rawurlencode($venueTopic)) : '' ?>"><?= escapeHtml($site['email']) ?></a>
+                <a href="<?= escapeHtml($site['phone_uri']) ?>"><?= escapeHtml($site['phone']) ?></a>
+                <p><?= implode('<br>', array_map('escapeHtml', $site['address_lines'])) ?></p>
             </address>
         </div>
         <form class="contact-form" action="contact.php" method="post" aria-describedby="contact-note">

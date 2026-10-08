@@ -1,0 +1,6 @@
+# Project-local discovery endpoints; existing PHP navigation stays unchanged.
+RewriteEngine On
+RewriteRule ^(?:storage|database)/ - [F,L]
+RewriteRule ^scripts/(?:cms-|check-cms) - [F,L]
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+RewriteRule ^robots\.txt$ robots.php [L]

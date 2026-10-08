@@ -1,5 +1,6 @@
 <?php
-require __DIR__ . '/includes/catalog.php';
+require_once __DIR__ . '/includes/helpers.php';
+$site = require __DIR__ . '/data/site.php';
 require __DIR__ . '/includes/contact-handler.php';
 $homeContent = require __DIR__ . '/data/home.php';
 $venues = require __DIR__ . '/data/venues.php';

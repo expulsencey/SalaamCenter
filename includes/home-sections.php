@@ -1,4 +1,7 @@
-<?php if (!isset($homeContent) || !function_exists('escapeHtml')) { http_response_code(404); exit; } ?>
+<?php
+// Requires $homeContent, $events, $partners, $site and escapeHtml().
+// The caller must load contact-handler.php before output for the nested contact form.
+ if (!isset($homeContent) || !function_exists('escapeHtml')) { http_response_code(404); exit; } ?>
 <section class="home-section section-soft" id="about" aria-labelledby="about-title">
     <div class="container split-layout reveal">
         <figure class="section-visual"><img class="about-reception-image" src="assets/images/about/salaam-center-reception.webp" alt="Salaam Center reception area" width="1597" height="720" loading="lazy"></figure>
@@ -12,11 +15,7 @@
             <?php foreach ($homeContent['benefits'] as $benefit): ?>
                 <article class="benefit-card">
                     <img class="benefit-background" src="<?= escapeHtml($benefit['image']) ?>" alt="" loading="lazy" decoding="async">
-                    <span class="benefit-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6">
-                    <?php if ($benefit['icon'] === 'target'): ?><circle cx="16" cy="16" r="11"/><circle cx="16" cy="16" r="6"/><circle cx="16" cy="16" r="1"/>
-                    <?php elseif ($benefit['icon'] === 'people'): ?><circle cx="12" cy="10" r="4"/><path d="M3 27v-3a9 9 0 0 1 18 0v3M23 6a4 4 0 0 1 0 8M25 18a7 7 0 0 1 4 6v3"/>
-                    <?php else: ?><path d="M5 5v22h23M10 22v-6M17 22V11M24 22V5"/><?php endif; ?>
-                </svg></span><h3><?= escapeHtml($benefit['title']) ?></h3><p><?= escapeHtml($benefit['text']) ?></p></article>
+                    <h3><?= escapeHtml($benefit['title']) ?></h3><p><?= escapeHtml($benefit['text']) ?></p></article>
             <?php endforeach; ?>
         </div>
     </div>
@@ -67,8 +66,8 @@
         </div>
         <div class="spaces-actions reveal">
             <a class="hero-button spaces-primary" href="about.php#our-spaces">Explore Our Spaces</a>
-            <a class="hero-button button-outline" href="contact.php">Contact Us</a>
-            <a class="hero-button button-outline" href="about.php#venue-hire">Venue Hire</a>
+            <a class="text-link" href="contact.php">Contact Us</a>
+            <a class="text-link" href="about.php#venue-hire">Venue Hire</a>
         </div>
     </div>
 </section>

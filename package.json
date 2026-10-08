@@ -1,0 +1,12 @@
+{
+  "name": "salaam-center-deployment",
+  "private": true,
+  "scripts": {
+    "export": "node scripts/export.mjs",
+    "deploy": "npm run export && wrangler deploy",
+    "preview": "npm run export && wrangler dev --local"
+  },
+  "devDependencies": {
+    "wrangler": "4.147.0"
+  }
+}

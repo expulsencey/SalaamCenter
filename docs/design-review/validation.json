@@ -1,0 +1,922 @@
+{
+  "viewports": [
+    {
+      "route": "index.php",
+      "width": 1920,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": true,
+      "focus": "none"
+    },
+    {
+      "route": "about.php",
+      "width": 1920,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "courses.php",
+      "width": 1920,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "course.php?slug=ccna",
+      "width": 1920,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "categories.php",
+      "width": 1920,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "category.php?slug=islamic-banking-finance",
+      "width": 1920,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "events.php",
+      "width": 1920,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "event.php?slug=administrative-management-training",
+      "width": 1920,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "partners.php",
+      "width": 1920,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "contact.php",
+      "width": 1920,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": true,
+      "focus": "none"
+    },
+    {
+      "route": "sc-business.php",
+      "width": 1920,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "index.php",
+      "width": 1440,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": true,
+      "focus": "none"
+    },
+    {
+      "route": "about.php",
+      "width": 1440,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "courses.php",
+      "width": 1440,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "course.php?slug=ccna",
+      "width": 1440,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "categories.php",
+      "width": 1440,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "category.php?slug=islamic-banking-finance",
+      "width": 1440,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "events.php",
+      "width": 1440,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "event.php?slug=administrative-management-training",
+      "width": 1440,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "partners.php",
+      "width": 1440,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "contact.php",
+      "width": 1440,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": true,
+      "focus": "none"
+    },
+    {
+      "route": "sc-business.php",
+      "width": 1440,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "index.php",
+      "width": 1366,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": true,
+      "focus": "none"
+    },
+    {
+      "route": "about.php",
+      "width": 1366,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "courses.php",
+      "width": 1366,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "course.php?slug=ccna",
+      "width": 1366,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "categories.php",
+      "width": 1366,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "category.php?slug=islamic-banking-finance",
+      "width": 1366,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "events.php",
+      "width": 1366,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "event.php?slug=administrative-management-training",
+      "width": 1366,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "partners.php",
+      "width": 1366,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "contact.php",
+      "width": 1366,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": true,
+      "focus": "none"
+    },
+    {
+      "route": "sc-business.php",
+      "width": 1366,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "index.php",
+      "width": 1024,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": true,
+      "focus": "none"
+    },
+    {
+      "route": "about.php",
+      "width": 1024,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "courses.php",
+      "width": 1024,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "course.php?slug=ccna",
+      "width": 1024,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "categories.php",
+      "width": 1024,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "category.php?slug=islamic-banking-finance",
+      "width": 1024,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "events.php",
+      "width": 1024,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "event.php?slug=administrative-management-training",
+      "width": 1024,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "partners.php",
+      "width": 1024,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "contact.php",
+      "width": 1024,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": true,
+      "focus": "none"
+    },
+    {
+      "route": "sc-business.php",
+      "width": 1024,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "index.php",
+      "width": 768,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": true,
+      "focus": "none"
+    },
+    {
+      "route": "about.php",
+      "width": 768,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "courses.php",
+      "width": 768,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "course.php?slug=ccna",
+      "width": 768,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "categories.php",
+      "width": 768,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "category.php?slug=islamic-banking-finance",
+      "width": 768,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "events.php",
+      "width": 768,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "event.php?slug=administrative-management-training",
+      "width": 768,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "partners.php",
+      "width": 768,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "contact.php",
+      "width": 768,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": true,
+      "focus": "none"
+    },
+    {
+      "route": "sc-business.php",
+      "width": 768,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "index.php",
+      "width": 430,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": true,
+      "focus": "none"
+    },
+    {
+      "route": "about.php",
+      "width": 430,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "courses.php",
+      "width": 430,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "course.php?slug=ccna",
+      "width": 430,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "categories.php",
+      "width": 430,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "category.php?slug=islamic-banking-finance",
+      "width": 430,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "events.php",
+      "width": 430,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "event.php?slug=administrative-management-training",
+      "width": 430,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "partners.php",
+      "width": 430,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "contact.php",
+      "width": 430,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": true,
+      "focus": "none"
+    },
+    {
+      "route": "sc-business.php",
+      "width": 430,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "index.php",
+      "width": 390,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": true,
+      "focus": "none"
+    },
+    {
+      "route": "about.php",
+      "width": 390,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "courses.php",
+      "width": 390,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "course.php?slug=ccna",
+      "width": 390,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "categories.php",
+      "width": 390,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "category.php?slug=islamic-banking-finance",
+      "width": 390,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "events.php",
+      "width": 390,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "event.php?slug=administrative-management-training",
+      "width": 390,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "partners.php",
+      "width": 390,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "contact.php",
+      "width": 390,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": true,
+      "focus": "none"
+    },
+    {
+      "route": "sc-business.php",
+      "width": 390,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "index.php",
+      "width": 375,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": true,
+      "focus": "none"
+    },
+    {
+      "route": "about.php",
+      "width": 375,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "courses.php",
+      "width": 375,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "course.php?slug=ccna",
+      "width": 375,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "categories.php",
+      "width": 375,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "category.php?slug=islamic-banking-finance",
+      "width": 375,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "events.php",
+      "width": 375,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "event.php?slug=administrative-management-training",
+      "width": 375,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "partners.php",
+      "width": 375,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    },
+    {
+      "route": "contact.php",
+      "width": 375,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": true,
+      "focus": "none"
+    },
+    {
+      "route": "sc-business.php",
+      "width": 375,
+      "overflow": false,
+      "h1": 1,
+      "missingAlt": 0,
+      "broken": [],
+      "form": false,
+      "focus": "none"
+    }
+  ],
+  "interactions": {
+    "mobileOpen": true,
+    "mobileEscape": true,
+    "dropdown": true,
+    "dropdownEscape": true,
+    "currencyDJF": true,
+    "currencyPersist": true,
+    "heroAutoplay": true,
+    "testimonialNext": "2 / 2",
+    "aboutAutoplay": true,
+    "event.php?slug=administrative-management-training": {
+      "muted": true,
+      "loop": true,
+      "inline": true,
+      "autoplay": true,
+      "ready": 4,
+      "playing": true,
+      "error": null
+    },
+    "event.php?slug=strategic-commercial-development-ports": {
+      "muted": true,
+      "loop": true,
+      "inline": true,
+      "autoplay": true,
+      "ready": 4,
+      "playing": true,
+      "error": null
+    },
+    "partnersMotion": true,
+    "reducedHero": true,
+    "reducedPartner": true,
+    "currencyUSD": true,
+    "reducedAbout": true,
+    "contactFields": true,
+    "focusVisible": true
+  },
+  "jsExceptions": [],
+  "testNotes": "Dropdown Escape retested with keyboard focus on summary; currency assertion compares formatted labels, not raw numeric data attributes."
+}

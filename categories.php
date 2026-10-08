@@ -1,5 +1,7 @@
 <?php
-require __DIR__ . '/includes/catalog.php';
+require_once __DIR__ . '/includes/helpers.php';
+$site = require __DIR__ . '/data/site.php';
+$courseCategories = require __DIR__ . '/data/categories.php';
 $pageTitle = 'Course Categories — Salaam Center';
 $activePage = 'categories';
 require __DIR__ . '/includes/head.php';

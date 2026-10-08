@@ -25,3 +25,13 @@ Desktop.ini
 # Local backups
 *.bak
 *.backup
+
+# Generated Cloudflare export and local deployment tooling
+cloudflare-dist/
+node_modules/
+.wrangler/
+.npm-cache/
+
+# Private CMS storage and isolated QA state
+storage/*
+!storage/.htaccess

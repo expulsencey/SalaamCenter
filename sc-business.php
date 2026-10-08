@@ -1,5 +1,6 @@
 <?php
-require __DIR__ . '/includes/catalog.php';
+require_once __DIR__ . '/includes/helpers.php';
+$site = require __DIR__ . '/data/site.php';
 $homeContent = require __DIR__ . '/data/home.php';
 $activePage = 'sc-business';
 $pageHeading = 'SC Business';

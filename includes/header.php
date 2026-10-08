@@ -1,13 +1,15 @@
-<?php if (!isset($pageTitle, $activePage) || !function_exists('escapeHtml')) { http_response_code(404); exit; } ?>
+<?php
+// Requires $site from data/site.php, $pageTitle, $activePage and escapeHtml().
+ if (!isset($pageTitle, $activePage) || !function_exists('escapeHtml')) { http_response_code(404); exit; } ?>
     <div class="top-bar">
         <div class="container top-bar-content">
             <ul class="contact-links" aria-label="Contact details">
-                <li><a href="tel:+25321354317">(+253) 21 35 43 17</a></li>
-                <li><a href="mailto:info@salaamcenter.net">info@salaamcenter.net</a></li>
+                <li><a href="<?= escapeHtml($site['phone_uri']) ?>"><?= escapeHtml($site['phone']) ?></a></li>
+                <li><a href="mailto:<?= escapeHtml($site['email']) ?>"><?= escapeHtml($site['email']) ?></a></li>
             </ul>
             <ul class="social-links" aria-label="Social media">
-                <li><a href="https://www.facebook.com/SalaamCenterDjibouti" aria-label="Salaam Center on Facebook">Facebook</a></li>
-                <li><a href="https://www.linkedin.com/company/salaam-center/" aria-label="Salaam Center on LinkedIn">LinkedIn</a></li>
+                <li><a href="<?= escapeHtml($site['facebook_url']) ?>" aria-label="Salaam Center on Facebook">Facebook</a></li>
+                <li><a href="<?= escapeHtml($site['linkedin_url']) ?>" aria-label="Salaam Center on LinkedIn">LinkedIn</a></li>
             </ul>
         </div>
     </div>
@@ -39,7 +41,6 @@
                     <li><a class="navigation-link" href="contact.php"<?= $activePage === 'contact' ? ' aria-current="page"' : '' ?>>Contact</a></li>
                 </ul>
             </nav>
-            <label class="currency-control" hidden><span class="visually-hidden">Display currency</span><select id="display-currency" aria-label="Display currency"><option value="USD">USD ($)</option><option value="DJF">DJF (Fdj)</option></select></label>
         </div>
     </header>
 

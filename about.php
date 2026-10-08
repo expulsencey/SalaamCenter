@@ -1,5 +1,6 @@
 <?php
-require __DIR__ . '/includes/catalog.php';
+require_once __DIR__ . '/includes/helpers.php';
+$site = require __DIR__ . '/data/site.php';
 $partners = require __DIR__ . '/data/partners.php';
 $venues = require __DIR__ . '/data/venues.php';
 $activePage = 'about';
@@ -32,14 +33,6 @@ require __DIR__ . '/includes/header.php';
             <img class="about-slide about-slide--classroom-training" src="assets/images/about/hero/salaam-classroom-training.webp" alt="A trainer presenting to participants in a Salaam Center classroom" width="1500" height="1001" loading="lazy" aria-hidden="true" decoding="async">
             <img class="about-slide about-slide--group-workshop" src="assets/images/about/hero/salaam-group-workshop.webp" alt="Participants exchanging ideas around a table at Salaam Center" width="768" height="513" loading="lazy" aria-hidden="true" decoding="async">
             <img class="about-slide about-slide--training-presentation" src="assets/images/about/hero/salaam-training-presentation.webp" alt="A trainer discussing a presentation with participants at Salaam Center" width="1000" height="1000" loading="lazy" aria-hidden="true" decoding="async">
-            <div class="about-slideshow-controls" hidden>
-                <button type="button" class="about-slide-dot" aria-label="Show photo 1: reception" aria-pressed="true"><span aria-hidden="true"></span></button>
-                <button type="button" class="about-slide-dot" aria-label="Show photo 2: individual learning" aria-pressed="false"><span aria-hidden="true"></span></button>
-                <button type="button" class="about-slide-dot" aria-label="Show photo 3: classroom training" aria-pressed="false"><span aria-hidden="true"></span></button>
-                <button type="button" class="about-slide-dot" aria-label="Show photo 4: group workshop" aria-pressed="false"><span aria-hidden="true"></span></button>
-                <button type="button" class="about-slide-dot" aria-label="Show photo 5: training presentation" aria-pressed="false"><span aria-hidden="true"></span></button>
-                <button type="button" class="about-slide-pause" aria-label="Pause slideshow">Pause</button>
-            </div>
         </div>
     </header>
     <section class="home-section" aria-labelledby="about-who-title">

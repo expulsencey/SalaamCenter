@@ -2,9 +2,9 @@
 
 Reference inspected: [official homepage](https://salaamcenter.net/), [All Courses](https://salaamcenter.net/courses/), [Categories](https://salaamcenter.net/collections/).
 
-Courses opens All Courses and Categories. courses.php shows 24 courses in supplied order; categories.php shows six category image/name cards; category.php validates a category slug and renders its courses server-side. All destinations work without JavaScript. Homepage retains six featured courses.
+Courses opens All Courses and Categories. courses.php reads the current published MySQL catalogue (24 original courses, with no operational count limit); categories.php shows six category image/name cards; category.php validates a category slug and renders its courses server-side. All destinations work without JavaScript. Homepage retains six featured courses.
 
-One shared card: image, USD badge at its bottom-left, linked title below. All richer metadata remains on course.php. Currency conversion and authoritative source amounts are unchanged.
+One shared card: image and linked title below. All richer metadata remains on course.php. Course/session pricing and currency conversion are retired from public/admin interfaces. Historical source amounts remain inactive reference data. See CMS.md for the current staff workflow.
 
 ## Category assignments
 

@@ -1,0 +1,11 @@
+.blog-list { display:grid; gap:3rem; }
+.blog-summary { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.4fr); gap:2rem; padding-block:0 3rem; border-bottom:1px solid var(--color-border); }
+.blog-summary>div:only-child { grid-column:1 / -1; }
+.blog-summary img { width:100%; height:auto; aspect-ratio:3/2; object-fit:cover; border-radius:var(--radius-editorial); }
+.blog-summary h2 { font-size:clamp(1.5rem,2.5vw,2rem); margin-block:.75rem; overflow-wrap:anywhere; }
+.blog-summary p { margin-bottom:1rem; } .blog-summary time { color:var(--color-text-light); font-size:.875rem; }
+.blog-article { max-width:75ch; margin-inline:auto; overflow-wrap:anywhere; }
+.blog-featured { display:block; width:100%; height:auto; margin-bottom:2.5rem; border-radius:var(--radius-editorial); }
+.blog-body p,.blog-body ul,.blog-body ol { margin-block:1.25rem; } .blog-body ul,.blog-body ol { padding-left:1.5rem; }
+.blog-body h2,.blog-body h3 { margin-block:2.5rem 1rem; } .blog-body a { color:var(--color-primary); text-decoration:underline; }
+@media(max-width:48rem) { .blog-summary { grid-template-columns:minmax(0,1fr); gap:1.25rem; } }

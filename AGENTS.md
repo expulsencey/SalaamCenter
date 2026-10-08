@@ -1,3 +1,9 @@
+> Current policy ? 7 October 2026: the user explicitly retired all active Course
+> and Training pricing. Earlier requirements below for USD/DJF, price badges,
+> currency controls and preserving conversion are superseded. Preserve dormant
+> historical amounts and the immutable seed; do not display or edit them. Venue
+> rental rates remain unchanged. See [CMS workflows](docs/CMS.md) for details.
+
 # Website language policy
 
 - English is the default language for all current and future website pages and sections. Use `<html lang="en">`.
@@ -77,7 +83,7 @@ Allowed:
 - CSS3
 - Vanilla JavaScript
 - PHP
-- MySQL later when explicitly requested
+- MySQL for authorized contact storage and CMS articles, courses and training sessions; additional modules require an explicit request
 
 Do NOT introduce without explicit approval:
 
@@ -337,12 +343,14 @@ index.php
 course.php
 and other pages.
 
-Until MySQL is introduced, prefer:
+After the authorized CMS migration, courses and training sessions use MySQL through
+includes/course-store.php. The following file is retained only as an immutable
+migration/reference source, not a second live catalogue:
 
 data/courses.php
 
-The homepage course cards and detailed course pages should read from the
-same structured course dataset.
+Homepage cards, course/category pages, details, SEO and sitemap read the same
+database-backed course service. Never restore a silent file fallback after import.
 
 Conceptually:
 
@@ -705,8 +713,9 @@ Hero requirements:
 - responsive
 - readable overlay
 - appropriate contrast
-- previous/next controls
+- controls only where the current feature specification calls for them
 - indicators when used
+- current user-approved exception: homepage and About photo Heroes have no visible controls; do not restore them without a new request
 - keyboard/accessibility considerations
 - no image distortion
 - reduced-motion support
@@ -840,17 +849,21 @@ Do not weaken PHP/server security for convenience.
 
 Do not implement authentication casually.
 
-Authentication and administration will be handled deliberately later.
+Article, course and training-session administration is authorized; follow docs/CMS.md.
 
 ---
 
 # 27. Database
 
-Do NOT introduce MySQL until explicitly requested.
+The contact enquiry backend has already been explicitly authorized and implemented.
+The article/course/session CMS is explicitly authorized; schema and setup are documented in docs/CMS.md.
+Its local configuration and database readiness must be verified before claiming successful storage.
+Course and session content is authoritative in MySQL after the recorded import. Other
+business datasets remain file-backed. Do not introduce further modules without a request.
 
 Current course data may remain in structured PHP data.
 
-When MySQL is introduced later:
+For existing and future authorized MySQL work:
 
 - use prepared statements;
 - never concatenate untrusted input into SQL;
@@ -865,7 +878,7 @@ Do not start phpMyAdmin/database work during unrelated frontend tasks.
 
 The homepage is developed progressively.
 
-Planned order:
+Historical development sequence (not the current implementation inventory):
 
 1. Project structure
 2. Top Bar + Header + Navigation
@@ -874,7 +887,7 @@ Planned order:
 5. About Salaam Center
 6. Key Figures / Statistics
 7. Programs & Services
-8. Talent Management Program
+8. Talent Management Program (superseded by the learning-spaces presentation at the user's request; do not restore it from this historical list)
 9. Testimonials
 10. News & Events
 11. Partners
@@ -1042,6 +1055,9 @@ Do not sacrifice maintainability for microscopic optimizations.
 
 # 37. SEO Foundations
 
+For SEO-related work, read [docs/SEO.md](docs/SEO.md). Use the shared SEO helpers
+and public configuration; preserve canonical/sitemap consistency and factual data.
+
 When building pages, maintain basic SEO quality:
 
 - meaningful <title>
@@ -1163,7 +1179,7 @@ It is complete when:
 
 If any of these conditions cannot be satisfied, clearly report the
 limitation instead of hiding it.
-# 43. Currency Policy ? Critical
+# 43. Currency Policy — Critical
 
 - Public course prices support exactly USD and DJF.
 - USD is the default display currency, including when JavaScript is unavailable.
@@ -1663,3 +1679,54 @@ Before declaring a task complete, verify that:
 [ ] text has not been stripped of accents merely to avoid encoding issues
 
 UTF-8 integrity is part of the project's Definition of Done.
+
+# 45. Architecture, Brand and Maintainability
+
+For any visual/UI work, read [docs/DESIGN.md](docs/DESIGN.md) and
+[docs/BRAND_GUIDELINES.md](docs/BRAND_GUIDELINES.md) before implementation.
+If the work also changes architecture, read [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+DESIGN.md defines interface direction; BRAND_GUIDELINES.md defines brand/asset
+constraints; ARCHITECTURE.md defines technical organization. If these documents
+conflict, report the conflict before implementing; do not silently choose one.
+
+Before substantial architectural or visual changes, read:
+
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+- [docs/BRAND_GUIDELINES.md](docs/BRAND_GUIDELINES.md)
+
+These documents distinguish current implementation from recommended future work.
+They do not authorize a refactor or override the latest explicit user instructions.
+
+- Inspect before implementing; reuse before creating.
+- Keep one authoritative source for each business dataset.
+- Avoid unrelated responsibilities in one file, but never split files solely by line count.
+- Avoid duplicated PHP, CSS, JavaScript and business data.
+- Document meaningful architecture changes and mark obsolete task reports as historical.
+- Follow the brand guidelines before visual changes; do not invent colors, gradients or logo treatments.
+- Do not perform unrelated large refactors. Preserve behavior and validate affected pages during refactoring.
+- Current About photo slideshow: 4-second rotation, 1.2-second dissolve, no visible controls or hover pause.
+  Homepage Hero remains independent at 5.5 seconds. Both respect reduced motion and hidden tabs.
+- Course/session CMS editing is authorized. Preserve the public catalogue design, currency
+  conversion and verified source amounts; do not invent prices or dates.
+  Current currencies remain USD ($) and DJF (Fdj), with USD as the first-visit default; no EUR.
+- Structured SEO and the article/course/session CMS are implemented; read docs/SEO.md and docs/CMS.md.
+  Do not add other CMS modules, WordPress or a headless service without authorization.
+
+Policy reconciliation on 5 October 2026: the stack/database language now acknowledges the
+already-authorized contact backend; course storage remains in PHP. The old compulsory Hero
+controls and historical Talent step are explicitly qualified by later user decisions.
+The section 43 heading's corrupted separator was corrected; the USD/DJF policy was preserved.
+Existing valid language, provenance, security, UTF-8, scope and Git rules remain in force.
+
+# 46. Content CMS
+
+- Read [docs/CMS.md](docs/CMS.md) before CMS work.
+- Never bypass administrator authentication, CSRF or media access checks.
+- Never expose credentials in source, responses, logs or documentation.
+- Never expose drafts or their images publicly, including through previews or sitemap.
+- Never invent article or business content; remove temporary test articles after validation.
+- Preserve shared SEO integration and stable published URLs.
+- CMS manages articles, courses and training sessions. Events/Partners remain read-only datasets.
+- Preserve the existing admin account and course-import ledger. Re-running import must never overwrite CMS edits.
+- Preserve historical USD source amounts until explicitly replaced with verified DJF amounts; new session prices use DJF.
+- Never expose course/session drafts in the public catalogue, media endpoint, SEO or sitemap.

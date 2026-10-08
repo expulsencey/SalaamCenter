@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/includes/catalog.php';
+$site = require __DIR__ . '/data/site.php';
 $slug = $_GET['slug'] ?? '';
 $category = is_string($slug) ? ($courseCategories[$slug] ?? null) : null;
 if (!$category) http_response_code(404);

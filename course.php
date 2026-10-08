@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/includes/catalog.php';
+$site = require __DIR__ . '/data/site.php';
 $slug = $_GET['slug'] ?? '';
 $course = is_string($slug) ? ($courses[$slug] ?? null) : null;
 if (!$course) {
@@ -28,9 +29,12 @@ require __DIR__ . '/includes/header.php';
             <div class="course-detail-layout">
                 <div class="course-detail-content">
                     <img class="course-detail-image" src="<?= escapeHtml($course['image']) ?>" alt="<?= escapeHtml($course['image_alt']) ?>" width="1000" height="560" fetchpriority="high">
-                    <?php if (!empty($course['brand_image'])): ?><img class="course-brand" src="<?= escapeHtml($course['brand_image']) ?>" alt="<?= escapeHtml($course['brand_alt']) ?>" loading="lazy"><?php endif; ?>
+                    <?php if (!empty($course['brand_image'])): $brandPath = __DIR__ . '/' . $course['brand_image']; $brandSize = is_file($brandPath) ? getimagesize($brandPath) : false; ?><img class="course-brand" src="<?= escapeHtml($course['brand_image']) ?>" alt="<?= escapeHtml($course['brand_alt']) ?>"<?php if ($brandSize): ?> width="<?= $brandSize[0] ?>" height="<?= $brandSize[1] ?>"<?php endif; ?> loading="lazy"><?php endif; ?>
                     <?php if ($course['description']): ?>
                         <section class="course-detail-section"><h2>Course Description</h2><p><?= escapeHtml($course['description']) ?></p></section>
+                    <?php endif; ?>
+                    <?php if (!empty($course['sessions']) && count($course['sessions']) > 1): ?>
+                        <section class="course-detail-section"><h2>Upcoming Training</h2><ul><?php foreach ($course['sessions'] as $session): ?><li><?= escapeHtml(courseDate($session['start_date'])) ?><?php if ($session['duration']): ?> · <?= escapeHtml($session['duration']) ?><?php endif; ?><?php if ($session['language']): ?> · <?= escapeHtml($session['language']) ?><?php endif; ?></li><?php endforeach; ?></ul></section>
                     <?php endif; ?>
                     <?php foreach (['outcomes' => 'Learning Outcomes', 'includes' => 'Course Includes', 'certificate' => 'Certificate', 'requirements' => 'Requirements', 'exam' => 'Exam & Evaluation'] as $key => $heading): ?>
                         <?php if (!empty($course[$key])): ?>
@@ -45,12 +49,12 @@ require __DIR__ . '/includes/header.php';
                     <?php if (courseFacts($course)): ?>
                     <h2>Course Information</h2>
                         <dl class="course-detail-facts">
-                            <?php foreach (courseFacts($course) as $label => $value): ?><div><dt><?= escapeHtml($label) ?></dt><dd><?= $label === 'Price' ? coursePriceMarkup($course) : escapeHtml($value) ?></dd></div><?php endforeach; ?>
+                            <?php foreach (courseFacts($course) as $label => $value): ?><div><dt><?= escapeHtml($label) ?></dt><dd><?= escapeHtml($value) ?></dd></div><?php endforeach; ?>
                         </dl>
                     <?php endif; ?>
                     <h2 class="enquiry-title">Interested in this course?</h2>
-                    <a class="hero-button courses-catalog" href="mailto:info@salaamcenter.net?subject=<?= escapeHtml(rawurlencode('Course enquiry: ' . $course['name'])) ?>">Contact Salaam Center</a>
-                    <a class="course-call" href="tel:+25321354317">Call (+253) 21 35 43 17</a>
+                    <a class="hero-button courses-catalog" href="mailto:<?= escapeHtml($site['email']) ?>?subject=<?= escapeHtml(rawurlencode('Course enquiry: ' . $course['name'])) ?>">Contact Salaam Center</a>
+                    <a class="course-call" href="<?= escapeHtml($site['phone_uri']) ?>">Call <?= escapeHtml($site['phone']) ?></a>
                 </aside>
             </div>
             <a class="catalog-back" href="courses.php">← View All Courses</a>
