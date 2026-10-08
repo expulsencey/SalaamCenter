@@ -24,7 +24,7 @@ require __DIR__ . '/includes/header.php';
             <header class="course-page-heading">
                 <p class="courses-eyebrow"><?= escapeHtml($course['category']) ?></p>
                 <h1 lang="<?= escapeHtml($course['title_language']) ?>"><?= escapeHtml($course['name']) ?></h1>
-                <?php if (!empty($course['subtitle'])): ?><p class="course-subtitle" lang="fr"><?= escapeHtml($course['subtitle']) ?></p><?php endif; ?>
+                <?php if (!empty($course['subtitle'])): ?><p class="course-subtitle" lang="<?= escapeHtml($course['title_language']) ?>"><?= escapeHtml($course['subtitle']) ?></p><?php endif; ?>
             </header>
             <div class="course-detail-layout">
                 <div class="course-detail-content">

@@ -5,6 +5,7 @@ try{$row=$id?courseRow($id):null;if(!$row){http_response_code(404);exit('Course 
 adminHead('Course preview'); ?>
 <p class="notice preview-notice">Private preview · <?= escapeHtml(ucfirst($row['status'])) ?>. Upcoming session values are included. <a href="course-edit.php?id=<?= (int)$id ?>">Return to editor</a></p>
 <article class="preview"><p><?= escapeHtml($course['category']) ?></p><h2 lang="<?= escapeHtml($course['title_language']) ?>"><?= escapeHtml($course['name']) ?></h2>
+<?php if(!empty($course['subtitle'])): ?><p class="course-subtitle" lang="<?= escapeHtml($course['title_language']) ?>"><?= escapeHtml($course['subtitle']) ?></p><?php endif; ?>
 <?php if($course['image']): ?><img class="editor-image" src="../<?= escapeHtml($course['image']) ?>" alt="<?= escapeHtml($course['image_alt']) ?>"><?php endif; ?>
 <?php if($course['description']): ?><p><?= escapeHtml($course['description']) ?></p><?php endif; ?>
 <dl><?php foreach(['duration'=>'Duration','language'=>'Language','format'=>'Format','level'=>'Level','next_session'=>'Next session'] as $key=>$label):if(!empty($course[$key])): ?><dt><?= $label ?></dt><dd><?= escapeHtml($course[$key]) ?></dd><?php endif;endforeach; ?></dl>
