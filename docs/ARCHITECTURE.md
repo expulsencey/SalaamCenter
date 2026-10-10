@@ -1,5 +1,35 @@
 # Salaam Center Website Architecture
 
+## Course editor Phase 2B - 10 October 2026
+
+The existing `admin/course-edit.php` form now groups the same mapped fields into five
+steps, enhanced by `assets/js/admin.js`; without JavaScript all sections remain visible.
+Validated values alone reach SQL; after errors, submitted text is restored separately
+for display. Failed version checks retain the submitted version to prevent stale retries
+from overwriting newer edits. The session editor shares the error-retention behavior.
+`admin/_fields.php` issues session-bound creation keys (up to 100 per record type).
+Successful inserts record their ID against the key; replay returns that editor without
+another insert. Existing authentication/CSRF and update version checks remain required.
+No schema, course data mapping, public service or permanent deletion handler changed.
+See [Phase 2B validation](CMS-PHASE2B-VALIDATION.md).
+
+## Course deletion update - 10 October 2026
+
+This replaces earlier draft-only/typed-slug requirements for course deletion.
+`admin/course-delete.php` accepts authenticated, CSRF-protected POSTs with a valid
+course ID and optimistic version. A transaction locks the course, checks existence,
+version and the number of linked sessions, then deletes exactly one row with prepared
+SQL. Any session blocks deletion; the error shows its count and management link.
+Published courses are eligible. FK RESTRICT is retained; no constraints are disabled
+and no session cascade or uploaded-file removal occurs. Article deletion is unchanged.
+
+The course editor progressively enhances an inline confirmation into a native dialog:
+labelled title/warning, safe initial Cancel focus, Escape, native focus containment and
+focus return. Explicit deletion submission dismisses the unrelated unsaved-edit warning.
+Without JavaScript the server confirmation form remains usable. The public catalogue,
+category/Home lists and sitemap continue reading the same published MySQL records.
+See [CMS-COURSE-DELETION.md](CMS-COURSE-DELETION.md) for validation and limitations.
+
 ## Current Phase 2 - administration workflow (7 October 2026)
 
 Phase 1 storage, public projection, authentication, uploads and SEO are reused.

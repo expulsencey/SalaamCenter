@@ -177,3 +177,23 @@ label.check { display:flex; align-items:center; gap:.75rem; font-weight:400; min
 .dashboard-intro { max-width:65ch; color:var(--color-text-light); }
 .dashboard-activity .page-actions a,.dashboard-schedule .page-actions a { display:inline-flex; align-items:center; min-height:44px; }
 .dashboard-columns .recent-list a,.schedule-list a { display:flex; align-items:center; min-height:44px; }
+
+/* Native modal keeps confirmation and keyboard focus together. */
+.course-delete-dialog { position:fixed; inset:0; margin:auto; width:min(34rem,calc(100% - 2rem)); max-height:calc(100dvh - 2rem); overflow:auto; padding:1.5rem; border:1px solid var(--line); border-radius:.5rem; background:var(--color-background); color:var(--ink); }
+.course-delete-dialog::backdrop { background:var(--ambient-glass); }
+.course-delete-dialog .retirement { border:0; padding:0; margin:0; }
+.course-delete-dialog h2 { margin-bottom:1rem; }
+.course-delete-name { font-weight:600; overflow-wrap:anywhere; }
+.course-delete-dialog p { margin-bottom:1rem; }
+.course-delete-dialog .actions { justify-content:flex-end; margin-top:1.5rem; }
+
+/* Course editor: five steps in the same form, with a readable review. */
+.course-steps { display:flex; flex-wrap:wrap; gap:.5rem; margin:1rem 0; }
+.course-steps button { flex:1 1 10rem; text-align:left; font-size:.875rem; }
+.course-steps [aria-current=step] { background:var(--ambient-soft); border-color:var(--blue); color:var(--blue); font-weight:600; }
+.wizard-navigation { justify-content:space-between; margin:1rem 0; }
+.course-review { display:grid; grid-template-columns:minmax(8rem,1fr) minmax(0,2fr); gap:.5rem 1.5rem; }
+.course-review dt { font-weight:600; }
+.course-review dd { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; }
+button:disabled,button[aria-disabled=true] { opacity:.65; cursor:wait; }
+@media(max-width:40rem) { .course-steps button { flex-basis:100%; } .course-review { grid-template-columns:minmax(0,1fr); } .course-review dd { margin-bottom:.75rem; } }

@@ -112,15 +112,109 @@ document.querySelectorAll('[data-image-picker]').forEach(picker => {
         else { image.hidden = true; image.removeAttribute('src'); }
     });
 });
+// One form and the existing field names; hidden steps still submit normally.
+const courseWizard = document.querySelector('[data-course-wizard]');
+if (courseWizard) {
+    const steps = [...courseWizard.querySelectorAll('[data-course-step]')];
+    const nav = document.createElement('nav'); nav.className = 'course-steps'; nav.setAttribute('aria-label', 'Course editing steps');
+    const progress = document.createElement('p'); progress.className = 'help'; progress.setAttribute('role', 'status');
+    const controls = document.createElement('div'); controls.className = 'actions wizard-navigation';
+    const previous = document.createElement('button'); previous.type = 'button'; previous.textContent = 'Previous';
+    const next = document.createElement('button'); next.type = 'button'; next.textContent = 'Next';
+    controls.append(previous, next); steps.at(-1).after(controls); steps[0].before(nav, progress);
+    let current = 0;
+    const review = () => {
+        const root = courseWizard.querySelector('[data-course-review]'); root.replaceChildren();
+        for (const step of steps.slice(0, -1)) {
+            const title = document.createElement('h2'); title.textContent = step.querySelector('legend').textContent;
+            const list = document.createElement('dl'); list.className = 'course-review'; root.append(title, list);
+            for (const field of step.querySelectorAll('input:not([type=hidden]),select,textarea')) {
+                let value = field.type === 'checkbox' ? (field.checked ? 'Yes' : 'No') : field.value;
+                if (field.type === 'file') value = field.files[0]?.name || '';
+                if (field.tagName === 'SELECT') value = field.selectedOptions[0]?.textContent || '';
+                if (!value) continue;
+                const label = field.closest('label'); const term = document.createElement('dt'); const description = document.createElement('dd');
+                const group = field.closest('.repeatable')?.querySelector('legend')?.textContent;
+                term.textContent = (group ? group + ' - ' : '') + (label?.firstChild?.textContent.trim() || field.name);
+                description.textContent = value; list.append(term, description);
+            }
+        }
+    };
+    const buttons = steps.map((step, index) => {
+        const button = document.createElement('button'); button.type = 'button';
+        button.textContent = `${index + 1}. ${step.querySelector('legend').textContent}`;
+        button.setAttribute('aria-controls', step.id); button.addEventListener('click', () => show(index)); nav.append(button);
+        step.querySelector('legend').tabIndex = -1;
+        return button;
+    });
+    function show(index, focus = true) {
+        current = index;
+        steps.forEach((step, i) => { step.hidden = i !== index; buttons[i].toggleAttribute('data-current', i === index); if (i === index) buttons[i].setAttribute('aria-current', 'step'); else buttons[i].removeAttribute('aria-current'); });
+        previous.disabled = index === 0; next.hidden = index === steps.length - 1;
+        progress.textContent = `Step ${index + 1} of ${steps.length}`;
+        if (index === steps.length - 1) review();
+        if (focus) steps[index].querySelector('legend').focus();
+    }
+    courseWizard.elements.name.required = true; courseWizard.elements.category_slug.required = true;
+    courseWizard.elements.sort_order.min = '1'; courseWizard.elements.sort_order.max = '100000'; courseWizard.elements.sort_order.required = true;
+    courseWizard.noValidate = true;
+    function validate(fields) {
+        const invalid = [...fields].find(field => !field.checkValidity());
+        if (!invalid) return true;
+        const index = steps.findIndex(step => step.contains(invalid)); if (index >= 0) show(index);
+        invalid.reportValidity(); return false;
+    }
+    previous.addEventListener('click', () => show(current - 1));
+    next.addEventListener('click', () => { if (validate(steps[current].querySelectorAll('input,select,textarea'))) show(current + 1); });
+    courseWizard.addEventListener('submit', event => {
+        const publishing = event.submitter?.value === 'publish';
+        const image = courseWizard.elements.image, upload = courseWizard.elements.upload;
+        image.setCustomValidity(publishing && !image.value && !upload.files.length ? 'Choose an image or upload one before publishing.' : '');
+        courseWizard.elements.image_alt.required = publishing;
+        if (!validate(courseWizard.querySelectorAll('input,select,textarea'))) event.preventDefault();
+    });
+    courseWizard.addEventListener('input', () => courseWizard.elements.image.setCustomValidity(''));
+    courseWizard.addEventListener('change', () => courseWizard.elements.image.setCustomValidity(''));
+    show(0, false);
+}
+
 document.querySelectorAll('[data-content-editor]').forEach(form => {
     const actions = form.querySelector('.editor-actions');
     if (!actions) return;
-    let dirty = false;
+    let dirty = false, submitting = false;
     const note = document.createElement('p'); note.className = 'unsaved-note'; note.setAttribute('role', 'status');
     note.textContent = 'Changes are saved only when you choose a save or publish action.';
     actions.before(note);
     const changed = () => { if (!dirty) { dirty = true; note.textContent = 'You have unsaved changes.'; } };
     form.addEventListener('input', changed); form.addEventListener('change', changed);
-    form.addEventListener('submit', () => { dirty = false; });
+    form.addEventListener('submit', event => {
+        if (event.defaultPrevented) return;
+        if (submitting) { event.preventDefault(); return; }
+        submitting = true; dirty = false; note.textContent = 'Saving. Please wait...';
+        // Keep submitter name/value enabled so PHP receives the intended action.
+        form.querySelectorAll('button[type=submit],button[name=action],.editor-actions button:not([type])').forEach(button => button.setAttribute('aria-disabled', 'true'));
+    });
+    window.addEventListener('pageshow', () => { submitting = false; form.querySelectorAll('[aria-disabled=true]').forEach(button => button.removeAttribute('aria-disabled')); });
+    document.addEventListener('submit', event => { if (event.target.matches('[data-course-delete-form]')) dirty = false; });
     window.addEventListener('beforeunload', event => { if (dirty) { event.preventDefault(); event.returnValue = ''; } });
 });
+
+// Keep a visible server-submitted confirmation when native dialogs are unavailable.
+const courseDeletePanel = document.querySelector('[data-course-delete-panel]');
+if (courseDeletePanel && typeof HTMLDialogElement !== 'undefined' && 'showModal' in HTMLDialogElement.prototype) {
+    const dialog = document.createElement('dialog');
+    dialog.className = 'course-delete-dialog'; dialog.id = 'course-delete-dialog';
+    dialog.setAttribute('aria-labelledby', 'course-delete-title');
+    dialog.setAttribute('aria-describedby', 'course-delete-warning');
+    const trigger = document.createElement('button');
+    trigger.type = 'button'; trigger.className = 'destructive'; trigger.textContent = 'Delete course';
+    trigger.setAttribute('aria-haspopup', 'dialog'); trigger.setAttribute('aria-controls', dialog.id);
+    courseDeletePanel.before(trigger, dialog); dialog.append(courseDeletePanel);
+    const cancelLink = dialog.querySelector('[data-course-delete-cancel]');
+    const cancel = document.createElement('button');
+    cancel.type = 'button'; cancel.textContent = 'Cancel'; cancel.setAttribute('data-course-delete-cancel', '');
+    cancelLink.replaceWith(cancel);
+    trigger.addEventListener('click', () => { dialog.showModal(); cancel.focus(); });
+    cancel.addEventListener('click', event => { event.preventDefault(); dialog.close(); });
+    dialog.addEventListener('close', () => trigger.focus());
+}

@@ -1,6 +1,6 @@
 # Salaam Center staff guide
 
-Current workflow: Phase 2A, 8 October 2026. This guide replaces the older installation
+Current workflow: Phase 2B, 10 October 2026. This guide replaces the older installation
 and expansion instructions. The existing installation is ready; do not repeat its
 migration/import or recreate the administrator. Technical operations are documented
 in [ARCHITECTURE.md](ARCHITECTURE.md#cms-operations-and-security).
@@ -37,8 +37,9 @@ or sales analytics.
 1. Open **Courses**. Search by title or URL name, filter by category/status and use
    the page links when needed. **Clear** resets filters.
 2. Select **Edit**, or **Add course** for a genuinely new catalogue entry.
-3. Use **On this page** to move between Basics, Image, Information, Content and
-   Presentation. Preserve official course names, including French accents. Write
+3. Use **Previous**, **Next**, or the five step buttons: **General information**,
+   **Organization**, **Learning content**, **Images and presentation**, and
+   **Review and publication**. Preserve official course names, including French accents. Write
    interface descriptions and image descriptions in English.
 4. Enter only confirmed information. Leave unknown optional fields empty. A course
    is a permanent catalogue entry; use a training session for a new delivery date.
@@ -48,7 +49,15 @@ or sales analytics.
    requirements and evaluation. Each row is one item. No HTML or JSON is needed.
 7. Set the display order and homepage selection if appropriate. The homepage is a
    selected showcase; it does not automatically display every course.
-8. **Save draft**, then **Preview saved version**. Publish only after checking it.
+8. Check the review, **Save draft**, then **Preview saved version**. Publish only after checking it.
+
+Save actions remain available at every step. Switching steps does not save changes.
+Without JavaScript, all five sections appear in one ordinary form. No fields are removed.
+Validation errors preserve entered text, lists and the selected existing image. If an
+upload must be selected again, the message explains this browser limitation. If another
+editor has changed the record, copy your pending text before reloading; retrying an old
+version cannot overwrite newer changes. Repeated creation submissions in the same
+signed-in session return the saved record instead of creating another course/session.
 
 The URL name is generated when left blank. After first publication it stays fixed,
 even if you change the title or temporarily unpublish the course. Published edits
@@ -123,14 +132,24 @@ listed as attached media. There is no permanent image deletion tool.
 
 ## Remove content safely
 
-Unpublishing is the usual way to retire a course or article without losing it.
-For permanent deletion, open **Retire or delete this course/article** in its editor.
-Check the displayed title, type its exact URL name and choose permanent deletion.
+Unpublishing removes a course or article from the website while keeping its record.
 
-Only a saved draft can be deleted. A course with linked sessions cannot be deleted;
-unpublish it instead. Another editor's changes invalidate an old deletion request.
-Deletion cannot be undone through the interface. Images are retained. There is no
-training-session deletion tool.
+For permanent course deletion, open its editor and choose **Delete course**. The
+confirmation shows the saved course title and explains that deletion is permanent
+and removes it from the website. Choose **Cancel** to return, or **Delete permanently**
+to confirm. Published courses can be deleted directly; no URL typing is needed.
+If training sessions reference the course, deletion is refused with their count
+and a **Manage associated sessions** link. Manage those relationships first, or
+unpublish the course to retire it. Sessions are never deleted automatically.
+
+Without JavaScript/native dialog support, the same confirmation is displayed inline.
+After success you return to Courses with an updated count and a success message.
+Another editor's changes invalidate an old deletion request. Uploaded images are
+retained; shared images may still be used elsewhere. Detached images require a later
+review before any cleanup. There is no automatic image or session deletion tool.
+
+Article deletion is unchanged: unpublish first, open **Retire or delete this article**,
+type its exact URL name and confirm. Permanent deletion cannot be undone in the CMS.
 
 ## Current limits and content rules
 
@@ -140,6 +159,7 @@ Do not invent dates, learning outcomes, statistics or other business information
 Events/Partners are read-only; Home/About/contact/brand settings are not CMS editors.
 
 Finish by selecting **Log out**, especially on a shared computer.
+See [Phase 2B validation](CMS-PHASE2B-VALIDATION.md) for saving fixes and the five-step editor.
 See [Phase 2A validation](CMS-PHASE2A-VALIDATION.md) for the current dashboard and
 navigation checks and limits. [Phase 2 validation](CMS-PHASE2-VALIDATION.md) records
 the earlier editor/media implementation; those workflows were preserved.

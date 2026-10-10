@@ -26,7 +26,7 @@ php("require 'includes/cms.php';cmsDatabase()->exec('CREATE DATABASE "+name+" CH
 try:
     # Restore the protected pre-change snapshot only into this disposable database.
     # Never rerun the historical course import or migrations.
-    restored=json.loads(php("require 'includes/cms.php';$b=json_decode(file_get_contents('storage/cms-qa/phase2-backup.json'),true,512,JSON_THROW_ON_ERROR);$p=cmsDatabase();$p->exec('SET FOREIGN_KEY_CHECKS=0');foreach($b['tables'] as $name=>$t){$p->exec($t['schema']);foreach($t['rows'] as $r){$q=$p->prepare('INSERT INTO `'.$name.'` (`'.implode('`,`',array_keys($r)).'`) VALUES ('.implode(',',array_fill(0,count($r),'?')).')');$q->execute(array_values($r));}}$p->exec('SET FOREIGN_KEY_CHECKS=1');$counts=[];foreach($b['tables'] as $name=>$t){$rows=$p->query('SELECT * FROM `'.$name.'`')->fetchAll();if($rows!==$t['rows'])throw new RuntimeException('Restore differs');$counts[$name]=count($rows);}echo json_encode($counts);"))
+    restored=json.loads(php("require 'includes/cms.php';$b=json_decode(file_get_contents('storage/cms-qa/phase2-backup.json'),true,512,JSON_THROW_ON_ERROR);$p=cmsDatabase();foreach($b['tables'] as $name=>$t){$p->exec($t['schema']);foreach($t['rows'] as $r){$q=$p->prepare('INSERT INTO `'.$name.'` (`'.implode('`,`',array_keys($r)).'`) VALUES ('.implode(',',array_fill(0,count($r),'?')).')');$q->execute(array_values($r));}}$counts=[];foreach($b['tables'] as $name=>$t){$rows=$p->query('SELECT * FROM `'.$name.'`')->fetchAll();if($rows!==$t['rows'])throw new RuntimeException('Restore differs');$counts[$name]=count($rows);}echo json_encode($counts);"))
     check(restored['cms_courses']==24 and restored['cms_course_sessions']==8,'backup restored exactly in isolated database; no migration rerun')
     setup('create-admin',{'email':'qa@example.invalid','display_name':'Temporary QA','password':password})
     (QA/'courses-router.php').write_text("<?php $p=parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH);if(preg_match('~^/(storage|database|includes|scripts)/|^/config~',$p)){http_response_code(403);exit;}return false;",encoding='utf-8')
@@ -121,7 +121,7 @@ try:
     check(soup(get('course.php?slug='+slug,anon)).select_one('meta[property="og:image"]')['content'].endswith(draft['featured_image']),'uploaded course social image')
     check(save(dp,dict(form(dp),slug='changed',action='publish')).status_code==422,'published URL stable')
     published_delete={'csrf_token':form(dp)['csrf_token'],'id':str(draftid),'version':form(dp)['version'],'confirm_slug':slug}
-    check(save('admin/course-delete.php',published_delete).status_code==422,'published course deletion blocked even without dependencies')
+    check(save('admin/course-delete.php',dict(published_delete,version='0')).status_code==422,'published course deletion rejects invalid version')
     check(save('admin/course-edit.php',dict(new,slug=slug)).status_code==422,'unique course slug enforced')
     ns=form('admin/session-edit.php');ns.update(course_id=str(draftid),start_date='2099-01-01',duration='2 days',language='English',status='draft');r=save('admin/session-edit.php',ns);check(r.status_code==303,'create draft session without pricing')
     newsid=int(re.search(r'id=(\d+)',r.headers['Location'])[1]);nsp='admin/session-edit.php?id='+str(newsid)
@@ -236,11 +236,11 @@ try:
     check(s.get(base+delete_path,allow_redirects=False).status_code==405,'course deletion rejects GET')
     check(save(delete_path,{}).status_code==403,'course deletion CSRF')
     deletion={'csrf_token':form(dp)['csrf_token'],'id':str(draftid),'version':form(dp)['version'],'confirm_slug':slug}
-    check(save(delete_path,dict(deletion,confirm_slug='wrong')).status_code==422,'delete requires exact confirmation')
+    check(save(delete_path,dict(deletion,id='0')).status_code==422,'delete requires valid course ID')
     check(save(delete_path,dict(deletion,version='1')).status_code==422,'stale deletion blocked')
     check(save(delete_path,deletion).status_code==422,'dependent sessions block deletion')
     php("require 'includes/cms.php';cmsDatabase()->exec('DELETE FROM cms_course_sessions WHERE id="+str(newsid)+"');")
-    check(save(delete_path,deletion).status_code==303,'confirmed draft without sessions deleted')
+    check(save(delete_path,deletion).status_code==303,'draft without sessions deleted')
     check(len(rows())==24,'only original courses remain after temporary course cleanup')
     for route in ['index.php','courses.php','categories.php','category.php?slug=information-technology','course.php?slug=power-bi','admin/courses.php','admin/course-edit.php?id=1','admin/course-preview.php?id=1','admin/sessions.php','admin/session-edit.php?id=1']:
         response=get(route);check(response.status_code==200,'pricing route loads '+route);doc=soup(response);check(not doc.select('[data-course-price],.course-price,#display-currency,[name=price_djf]'),'no active pricing markup '+route)

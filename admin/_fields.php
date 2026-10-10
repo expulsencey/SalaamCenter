@@ -4,6 +4,41 @@ function adminInput(string $name, string $label, mixed $value, string $type = 't
 {
     echo '<label>' . escapeHtml($label) . '<input name="' . escapeHtml($name) . '" type="' . escapeHtml($type) . '" maxlength="' . $max . '" value="' . escapeHtml((string)($value ?? '')) . '"></label>';
 }
+
+// Keep a replayed creation POST from inserting a second record (including without JS).
+function adminNewRecordKey(string $kind): string
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        cmsCheckCsrf();
+        $key = $_POST['submission_key'] ?? '';
+        if (!is_string($key) || !isset($_SESSION['cms_creations'][$kind][$key])) {
+            throw new InvalidArgumentException('This form has expired. Your text is shown below; review it and save again.');
+        }
+        $created = $_SESSION['cms_creations'][$kind][$key];
+        if ($created) {
+            $_SESSION['cms_notice'] = 'This submission was already saved. No duplicate was created.';
+            header('Location: '.$kind.'-edit.php?id='.(int)$created, true, 303); exit;
+        }
+        return $key;
+    }
+    return adminIssueRecordKey($kind);
+}
+
+function adminIssueRecordKey(string $kind): string
+{
+    $keys = &$_SESSION['cms_creations'][$kind];
+    if (!is_array($keys)) $keys = [];
+    while (count($keys) >= 100) array_shift($keys);
+    $key = bin2hex(random_bytes(24)); $keys[$key] = 0;
+    return $key;
+}
+
+// Redisplay submitted text only; persistence still uses the validated allowlist.
+function adminSubmittedText(string $name, mixed $fallback): mixed
+{
+    $value = $_POST[$name] ?? null;
+    return is_string($value) && mb_check_encoding($value, 'UTF-8') ? $value : $fallback;
+}
 function adminArea(string $name, string $label, mixed $value, int $max = 10000): void
 {
     echo '<label>' . escapeHtml($label) . '<textarea name="' . escapeHtml($name) . '" rows="4" maxlength="' . $max . '">' . escapeHtml((string)($value ?? '')) . '</textarea></label>';
