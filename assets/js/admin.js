@@ -1,8 +1,29 @@
 'use strict';
 const adminNavigation = document.querySelector('.admin-navigation');
 if (adminNavigation) {
-    const wideAdmin = window.matchMedia('(min-width: 68.001rem)');
-    const setNavigation = () => { adminNavigation.open = wideAdmin.matches; };
+    const wideAdmin = window.matchMedia('(min-width: 64.001rem)');
+    const summary = adminNavigation.querySelector('summary');
+    let summaryFocused = false;
+    summary.addEventListener('focus', () => { summaryFocused = true; });
+    summary.addEventListener('blur', event => {
+        // CSS hides the summary before the media-query callback runs on desktop.
+        if (event.relatedTarget || !wideAdmin.matches) summaryFocused = false;
+    });
+    const setNavigation = () => {
+        const focused = document.activeElement;
+        if (wideAdmin.matches) {
+            // Open the disclosure before focusing a link inside it.
+            adminNavigation.open = true;
+            if (focused === summary || (summaryFocused && focused === document.body)) {
+                adminNavigation.querySelector('[aria-current="page"]')?.focus();
+            }
+            summaryFocused = false;
+        } else {
+            // Return focus before hiding desktop navigation on a smaller screen.
+            if (adminNavigation.querySelector('nav').contains(focused)) summary.focus();
+            adminNavigation.open = false;
+        }
+    };
     setNavigation(); wideAdmin.addEventListener('change', setNavigation);
     adminNavigation.addEventListener('keydown', event => {
         if (event.key === 'Escape' && !wideAdmin.matches) { adminNavigation.open = false; adminNavigation.querySelector('summary').focus(); }

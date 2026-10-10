@@ -1,6 +1,6 @@
 # Salaam Center staff guide
 
-Current workflow: Phase 2, 7 October 2026. This guide replaces the older installation
+Current workflow: Phase 2A, 8 October 2026. This guide replaces the older installation
 and expansion instructions. The existing installation is ready; do not repeat its
 migration/import or recreate the administrator. Technical operations are documented
 in [ARCHITECTURE.md](ARCHITECTURE.md#cms-operations-and-security).
@@ -10,18 +10,27 @@ in [ARCHITECTURE.md](ARCHITECTURE.md#cms-operations-and-security).
 Open `http://localhost/SalaamCenter/admin/login.php` and use your staff account.
 If access fails, contact the site owner. Do not share passwords.
 
-The same navigation appears throughout administration: **Dashboard**, **Courses**,
+On desktop, a shared sidebar appears throughout administration: **Dashboard**, **Courses**,
 **Training Sessions**, **Articles**, **Media**, and **Events & Partners**. The current
-section is highlighted. On a small screen, open **Menu**; Escape closes it.
-**View website** opens the public site. **Log out** ends your session.
+section is highlighted, including inside its editors and previews. On a tablet or
+small screen, open **Menu**; its closed label also identifies the current section.
+Escape closes it and returns keyboard focus to Menu. Navigation also works without
+JavaScript. **View website** opens the public site. **Log out** ends your session.
+The navigation shows your signed-in name and email; long account details wrap.
 
 ## Dashboard
 
-The dashboard shows real content counts, recent course/article updates and the next
-scheduled training sessions. Choose **Add course**, **Add training session** or
+The dashboard shows total, published and draft courses, total training sessions,
+and published/draft articles. Counts link to the corresponding lists and filters
+and adapt to the database contents. Recently updated courses and recent articles
+have separate lists; the next three eligible training sessions show their dates.
+Choose **Add course**, **Add training session** or
 **New article** to start. Select a count to open its list. Upcoming training counts
 only upcoming sessions dated today or later whose courses are published.
-Events and Partners are view-only references. There are no visitor or sales analytics.
+When a list is empty, the dashboard explains how to start. If content cannot be
+loaded, it displays an unavailable message instead of misleading zero counts.
+Events and Partners remain view-only references in navigation. There are no visitor
+or sales analytics.
 
 ## Find and edit a course
 
@@ -131,4 +140,6 @@ Do not invent dates, learning outcomes, statistics or other business information
 Events/Partners are read-only; Home/About/contact/brand settings are not CMS editors.
 
 Finish by selecting **Log out**, especially on a shared computer.
-See [Phase 2 validation](CMS-PHASE2-VALIDATION.md) for checks and limitations.
+See [Phase 2A validation](CMS-PHASE2A-VALIDATION.md) for the current dashboard and
+navigation checks and limits. [Phase 2 validation](CMS-PHASE2-VALIDATION.md) records
+the earlier editor/media implementation; those workflows were preserved.
